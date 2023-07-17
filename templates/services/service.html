@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Detail View</title>
+    {% load static %}
+    <link rel="shortcut icon" href="/static/assets/images/logo.png" type="image/x-icon">
+    <link rel="icon" href="/static/assets/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'mine/css/style.css' %}">
+</head>
+    <body class="data">
+        <div class="container">
+
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'service:lists' %}"> &laquo; Return to Services.</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'service:infinity' %}"> &laquo; Return to Gallery.</a>
+                        </li>
+                    {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" style="margin-left:650px;">Hi {{ user.username | capfirst}}!</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}">Log Out</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item" style="margin-left:630px;">
+                            <p class="nav-link">You're not Logged In!</p>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Log in</a>
+                        </li>
+
+                    {% endif %}
+
+                </ul>
+
+              </div>
+
+            </nav>
+
+        </div>
+
+        <div class="container">
+            <h1>{{ service_data.name }}</h1>
+        <div class="prt">
+                <div>
+                {% for img in service_data.images_set.all %}
+                    <img src="{{ img.images.url}}" alt="no img" class="data-img">
+                {% endfor %}
+                </div>
+
+            <h4 class="date">{{ service_data.create_time }}</h4>
+                <div class="black">
+                    <h2>Description</h2>
+                    {{ service_data.discription | safe }} <br>
+                </div>
+        </div>
+
+        <div class="comment-section container">
+        <h3>Comments:</h3>
+            {% if service_data.service_comment.all %}
+                {% for comment in service_data.service_comment.all %}
+                    {% if comment.object_id == service_data.id %}
+                    <div class="row my-3">
+                        <div class="col-md-1">
+                            <img class="rounded mx-auto d-block w-100 p-2 border border-dark" src="/static/assets/images/user.png" alt="user">
+                        </div>
+                        <div class="col-md-11">
+                            <b> {{comment.author}} </b> <span class="badge bg-secondary">{{comment.comment_time}}</span>
+                            <div> {{comment.message}}</div>
+
+                            <div class="reply mx-0">
+                                <p class="link" data-toggle="collapse" data-target="#replyBox{{comment.id}}" aria-expanded="false" aria-controls="replyBox {{comment.id}}">
+                                    Reply
+                                </p>
+                                <div class="collapse reply-sec" id="replyBox{{comment.id}}">
+                                    {% for reply in comment.comment.all %}
+                                    <hr>
+                                    <div class="row my-3">
+                                        <div class="col-md-1">
+                                            <img class="rounded mx-auto d-block w-100 p-2 border border-danger" src="/static/assets/images/user.png" alt="user">
+                                        </div>
+                                        <div class="col-md-11">
+                                            <b> {{reply.author}} </b> <span class="badge badge-dark bg-white">{{reply.comment_time}}</span>
+                                            <div> {{reply.message}}</div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                <div class="my-2">
+                                    {% if user.is_authenticated %}
+                                        Reply as {{ user.username }}: <br>
+                                    <form action="{% url 'service:replies' %}" method="POST" novalidate>
+                                        {% csrf_token %}
+                                        <input type="text" name="reply" class="form" placeholder="Reply to {{ comment.author }}">
+                                        <input type="hidden" name="reply_id" value="{{ comment.id }}">
+                                        <input type="hidden" name="service" value="{{ comment.object_id }}">
+                                        <input type="hidden" name="authuser" value="{{ user.id}}">
+                                        <input class="btn btn-primary ms-2" type="submit" value="reply">
+                                    </form>
+                                    {% else %}
+                                        <p>Please Log in to Reply.....</p>
+                                    {% endif %}
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+            {% else %}
+                <h6>No Comments yet!! Be the First.</h6>
+            {% endif %}
+
+            <div class="container">
+            {% if user.is_authenticated %}
+                <span>Comment as {{ user.username }}:</span>
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    {% if from.errors %}
+                        {{ form.errors}}
+                    {% endif %}
+                    {{ form.as_p }}
+                    <input class="btn btn-outline-primary ms-2" type="submit" value="post">
+                </form>
+            {% else %}
+                <p>Please Log in to Comment.....</p>
+            {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/static/assets/js/bootstrap.bundle.js"></script>
+    <script src="/static/mine/js/script2.js"></script>
+    <script src="/static/mine/js/script.js"></script>
+    <script> $('.link').css('cursor', 'pointer'); </script>
+    </body>
+</html>
