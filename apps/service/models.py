@@ -16,6 +16,9 @@ class Services(models.Model):
     create_time = DateTimeField(blank=True, auto_now_add=True)
     service_comment = GenericRelation('comments')
 
+    class Meta:
+        verbose_name = "service"
+
     def __str__(self):
         return self.name
 
@@ -27,6 +30,9 @@ class Services(models.Model):
 class Images(models.Model):
     service = models.ForeignKey(Services, on_delete=models.CASCADE)
     images = models.ImageField(upload_to="service_images", max_length=256)
+
+    class Meta:
+        verbose_name = "image"
 
     def __str__(self):
         return '%s - %s' % (str(self.service), str(self.images))
@@ -40,6 +46,9 @@ class Comments(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
     comment_time = DateTimeField(auto_now_add=True, blank=True)
     comment = GenericRelation('comments')
+
+    class Meta:
+        verbose_name = "comment"
 
     def __str__(self):
         return self.message

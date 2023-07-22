@@ -32,11 +32,11 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class ServiceAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields': ['name', 'description']}),
-        ('Date information', {'fields': ['create_time'], 'classes': ['collapse']}),
-    ]
-    inlines = [ImagesInline,]
+    # fieldsets = [
+    #     (None, {'fields': ['name', 'description']}),
+    #     ('Date information', {'fields': ['create_time'], 'classes': ['collapse']}),
+    # ]
+    inlines = [ImagesInline, ]
     list_display = ('name', 'create_time',)
     readonly_fields = ('create_time',)
 

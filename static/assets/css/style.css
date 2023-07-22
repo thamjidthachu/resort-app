@@ -172,12 +172,13 @@ ul.errorlist>li {
 }
 
 .link{
-    color: rgb(89, 89, 226)
+   color: rgb(89, 89, 226);
+   cursor: pointer;
 }
 
 .link:hover
 {
-    color: rgb(149, 60, 60)
+    color: rgb(149, 60, 60);
 }
 .footer{
 width : 100%;

@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # admin skin
+    # "jazzmin",
+
+    # Inbuilt Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,7 +144,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL')
 EMAIL_DEFAULT_USER = config('DEFAULT_EMAIL')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
