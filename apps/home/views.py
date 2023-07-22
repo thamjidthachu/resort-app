@@ -9,4 +9,4 @@ class HomeView(ListView):
     context_object_name = 'sevices'
 
     def get_queryset(self):
-        return Services.objects.order_by('-create_time')[:3]
+        return Services.objects.order_by('-create_time')[:12]

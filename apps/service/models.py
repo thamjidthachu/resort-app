@@ -11,7 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 class Services(models.Model):
     name = models.CharField(max_length=40)
     image = models.ImageField(upload_to="service_images", max_length=256)
-    slug = models.SlugField(unique=True, default=name)
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
     description = RichTextField(null=True)
     create_time = DateTimeField(blank=True, auto_now_add=True)
     service_comment = GenericRelation('comments')

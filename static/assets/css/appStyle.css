@@ -1,11 +1,4 @@
-/*  COLORS
-========================================== */
-/*  FONTS
-========================================== */
-/*  MIXINS
-========================================== */
-/*  RESET
-========================================== */
+
 *, *:before, *:after {
   margin: 0;
   padding: 0;
@@ -20,9 +13,9 @@ body.overflow {
   overflow: hidden;
 }
 
-/*  BURGER
+/*  resort
 ========================================== */
-.burger {
+.resort {
   width: 50px;
   height: 50px;
   position: fixed;
@@ -31,7 +24,7 @@ body.overflow {
   border-radius: 4px;
   z-index: 10;
 }
-.burger span {
+.resort span {
   position: relative;
   margin-top: 9px;
   margin-bottom: 9px;
@@ -45,7 +38,7 @@ body.overflow {
   margin-left: -15px;
   margin-top: -1.5px;
 }
-.burger span, .burger span::before, .burger span::after {
+.resort span, .resort span::before, .resort span::after {
   display: block;
   width: 30px;
   height: 3px;
@@ -60,37 +53,37 @@ body.overflow {
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-.burger span::before, .burger span::after {
+.resort span::before, .resort span::after {
   position: absolute;
   content: "";
 }
-.burger span::before {
+.resort span::before {
   top: -9px;
 }
-.burger span::after {
+.resort span::after {
   top: 9px;
 }
-.burger.clicked span {
+.resort.clicked span {
   background-color: transparent;
 }
-.burger.clicked span::before {
+.resort.clicked span::before {
   -webkit-transform: translateY(9px) rotate(45deg);
   -moz-transform: translateY(9px) rotate(45deg);
   -ms-transform: translateY(9px) rotate(45deg);
   -o-transform: translateY(9px) rotate(45deg);
   transform: translateY(9px) rotate(45deg);
 }
-.burger.clicked span::after {
+.resort.clicked span::after {
   -webkit-transform: translateY(-9px) rotate(-45deg);
   -moz-transform: translateY(-9px) rotate(-45deg);
   -ms-transform: translateY(-9px) rotate(-45deg);
   -o-transform: translateY(-9px) rotate(-45deg);
   transform: translateY(-9px) rotate(-45deg);
 }
-.burger.clicked span:before, .burger.clicked span:after {
+.resort.clicked span:before, .resort.clicked span:after {
   background-color: #ffffff;
 }
-.burger:hover {
+.resort:hover {
   cursor: pointer;
 }
 
