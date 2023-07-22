@@ -10,10 +10,10 @@ from django.contrib.contenttypes.models import ContentType
 
 class Services(models.Model):
     name = models.CharField(max_length=40)
+    image = models.ImageField(upload_to="service_images", max_length=256)
     slug = models.SlugField(unique=True, default=name)
-    discription = RichTextField(null=True)
+    description = RichTextField(null=True)
     create_time = DateTimeField(blank=True, auto_now_add=True)
-    last_used_time = DateTimeField(null=True, blank=True)
     service_comment = GenericRelation('comments')
 
     def __str__(self):
@@ -25,15 +25,14 @@ class Services(models.Model):
 
 
 class Images(models.Model):
-    number = models.ForeignKey(Services, on_delete=models.CASCADE)
+    service = models.ForeignKey(Services, on_delete=models.CASCADE)
     images = models.ImageField(upload_to="service_images", max_length=256)
 
     def __str__(self):
-        return '%s - %s' % (str(self.number), str(self.images))
+        return '%s - %s' % (str(self.service), str(self.images))
 
 
 class Comments(models.Model):
-    # service_id = models.ForeignKey(Services, on_delete=models.CASCADE)
     author = models.ForeignKey(Costumer, on_delete=models.CASCADE)
     message = models.CharField(max_length=256)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)

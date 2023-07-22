@@ -79,6 +79,9 @@ celerybeat.pid
 resort_business_env/
 venv/
 ENV/
+media/
+
+service_images
 
 
 # mkdocs documentation

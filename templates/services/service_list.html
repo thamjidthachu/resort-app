@@ -57,7 +57,7 @@
             <tr>
                 <td>
                     {% if list.images_set.all %}
-                        <img src="{{ list.images_set.first.images.url }}" alt="img" class="list-img">
+                        <img src="{{ list.image.url }}" alt="img" class="list-img">
                     {% else %}
                         <p>No Images available</p>
                     {% endif %}

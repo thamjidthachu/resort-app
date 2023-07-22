@@ -58,10 +58,10 @@
             {% for list in resort_services %}
             <tr class="infinite-item">
                 <td>
-                    {% if list.images_set.all %}
-                        <img src="{{ list.images_set.first.images.url }}" alt="img" class="list-img">
+                    {% if list.image %}
+                        <img src="{{ list.image.url }}" alt="img" class="list-img">
                     {% else %}
-                        <p>No Images available!!</p>
+                        <p>No Image available!!</p>
                     {% endif %}
                 </td>
                 <td class=" align-middle"><a class="elements" href="{% url 'service:datas' list.slug %}">{{ list.name }}</a></td>
