@@ -89,7 +89,7 @@ body.overflow {
 
 /*  NAV
 ========================================== */
-nav {
+#toggler-nav {
   background-color: #2a2a2a;
   position: fixed;
   z-index: 9;
@@ -110,14 +110,14 @@ nav {
   -o-transition: transform 0.55s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   transition: transform 0.55s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
-nav.show {
+#toggler-nav.show {
   -webkit-transform: translateX(0px);
   -moz-transform: translateX(0px);
   -ms-transform: translateX(0px);
   -o-transform: translateX(0px);
   transform: translateX(0px);
 }
-nav.show ul.main li {
+#toggler-nav.show ul.main li {
   -webkit-transform: translateX(0px);
   -moz-transform: translateX(0px);
   -ms-transform: translateX(0px);
@@ -125,34 +125,34 @@ nav.show ul.main li {
   transform: translateX(0px);
   opacity: 1;
 }
-nav.show ul.main li:nth-child(1) {
+#toggler-nav.show ul.main li:nth-child(1) {
   transition-delay: 0.15s;
 }
-nav.show ul.main li:nth-child(2) {
+#toggler-nav.show ul.main li:nth-child(2) {
   transition-delay: 0.3s;
 }
-nav.show ul.main li:nth-child(3) {
+#toggler-nav.show ul.main li:nth-child(3) {
   transition-delay: 0.45s;
 }
-nav.show ul.main li:nth-child(4) {
+#toggler-nav.show ul.main li:nth-child(4) {
   transition-delay: 0.6s;
 }
-nav.show ul.main li:nth-child(5) {
+#toggler-nav.show ul.main li:nth-child(5) {
   transition-delay: 0.75s;
 }
-nav.show ul.main li:nth-child(6) {
+#toggler-nav.show ul.main li:nth-child(6) {
   transition-delay: 0.9s;
 }
-nav.show ul.main li:nth-child(7) {
+#toggler-nav.show ul.main li:nth-child(7) {
   transition-delay: 1.05s;
 }
-nav.show ul.main li:nth-child(8) {
+#toggler-nav.show ul.main li:nth-child(8) {
   transition-delay: 1.2s;
 }
-nav.show ul.main li:nth-child(9) {
+#toggler-nav.show ul.main li:nth-child(9) {
   transition-delay: 1.35s;
 }
-nav.show .about, nav.show .social, nav.show ul.sub {
+#toggler-nav.show .about, #toggler-nav.show .social, #toggler-nav.show ul.sub {
   -webkit-transform: translateY(0px);
   -moz-transform: translateY(0px);
   -ms-transform: translateY(0px);
@@ -162,14 +162,14 @@ nav.show .about, nav.show .social, nav.show ul.sub {
   transition-delay: 0.85s;
 }
 @media (min-width: 667px) {
-  nav {
+  #toggler-nav {
     padding: 120px 90px 70px 90px;
   }
 }
-nav ul.main {
+#toggler-nav ul.main {
   list-style-type: none;
 }
-nav ul.main li {
+#toggler-nav ul.main li {
   margin-bottom: 20px;
   -webkit-transform: translateX(40px);
   -moz-transform: translateX(40px);
@@ -182,10 +182,10 @@ nav ul.main li {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-nav ul.main li:last-of-type {
+#toggler-nav ul.main li:last-of-type {
   margin-bottom: 0px;
 }
-nav ul.main li a {
+#toggler-nav ul.main li a {
   color: #ffffff;
   font-family: "Raleway", sans-serif;
   text-decoration: none;
@@ -200,13 +200,13 @@ nav ul.main li a {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-nav ul.main li a span {
+#toggler-nav ul.main li a span {
   color: #b7ac7f;
 }
-nav ul.main li a:hover {
+#toggler-nav ul.main li a:hover {
   color: #b7ac7f;
 }
-nav .about {
+#toggler-nav .about {
   margin-top: 40px;
   -webkit-transform: translateY(30px);
   -moz-transform: translateY(30px);
@@ -219,14 +219,14 @@ nav .about {
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
-nav .about p {
+#toggler-nav .about p {
   color: #ffffff;
   font-family: "Spectral", serif;
   font-size: 1.05rem;
   letter-spacing: 0.5px;
   line-height: 170%;
 }
-nav .social {
+#toggler-nav .social {
   margin-top: 40px;
   position: relative;
   padding-bottom: 30px;
@@ -241,7 +241,7 @@ nav .social {
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
-nav .social:after {
+#toggler-nav .social:after {
   content: "";
   width: 230px;
   height: 2px;
@@ -250,30 +250,30 @@ nav .social:after {
   bottom: 0;
   left: 0;
 }
-nav .social a {
+#toggler-nav .social a {
   display: inline-block;
   width: 30px;
   height: 30px;
   margin-right: 25px;
 }
-nav .social a:last-of-type {
+#toggler-nav .social a:last-of-type {
   margin-right: 0px;
 }
-nav .social a:hover svg path, nav .social a:hover svg circle {
+#toggler-nav .social a:hover svg path, #toggler-nav .social a:hover svg circle {
   fill: #b7ac7f;
 }
-nav .social a svg {
+#toggler-nav .social a svg {
   width: 100%;
   height: 100%;
 }
-nav .social a svg path, nav .social a svg circle {
+#toggler-nav .social a svg path, #toggler-nav .social a svg circle {
   fill: #ffffff;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-nav ul.sub {
+#toggler-nav ul.sub {
   list-style-type: none;
   margin-top: 40px;
   -webkit-transform: translateY(30px);
@@ -287,13 +287,13 @@ nav ul.sub {
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
-nav ul.sub li {
+#toggler-nav ul.sub li {
   margin-bottom: 10px;
 }
-nav ul.sub li:last-of-type {
+#toggler-nav ul.sub li:last-of-type {
   margin-bottom: 0px;
 }
-nav ul.sub li a {
+#toggler-nav ul.sub li a {
   color: #ffffff;
   font-family: "Raleway", sans-serif;
   letter-spacing: 1px;
@@ -304,7 +304,7 @@ nav ul.sub li a {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-nav ul.sub li a:hover {
+#toggler-nav ul.sub li a:hover {
   color: #b7ac7f;
 }
 
