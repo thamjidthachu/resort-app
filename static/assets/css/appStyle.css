@@ -321,7 +321,7 @@ body.overflow {
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background-color: #b7ac7f;
+  background-color: #444b7b;
   opacity: 0;
   visibility: hidden;
 }
