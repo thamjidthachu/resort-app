@@ -1,7 +1,7 @@
 # Create your views here.
 
 from django.views.generic import ListView
-from apps.service.models import Services
+from apps.service.models import Service
 
 
 class HomeView(ListView):
@@ -9,4 +9,4 @@ class HomeView(ListView):
     context_object_name = 'sevices'
 
     def get_queryset(self):
-        return Services.objects.order_by('-create_time')[:12]
+        return Service.objects.order_by('-create_time')[:12]

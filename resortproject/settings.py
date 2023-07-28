@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # admin skin
-    # "jazzmin",
+    "jazzmin",
 
     # Inbuilt Apps
     'django.contrib.admin',
@@ -149,3 +149,20 @@ EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Resort Admin",
+    "site_header": "Resort Admin",
+    "site_brand": "Resort Admin",
+    "site_logo": "assets/images/logo.png",
+    "login_logo": "assets/images/logo.png",
+    "login_logo_classes": "img-circle logo-img",
+    "login_logo_dark": "assets/images/logo.png",
+    "site_logo_classes": "img-circle logo-img",
+
+    # Copyright on the footer
+    "copyright": "Thamjid Thachu Ltd",
+}
+
+

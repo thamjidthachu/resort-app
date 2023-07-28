@@ -1,43 +1,28 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Services, Images, Comments
+from .models import Service, File, Review
 
 
 # Register your models here.
-class ImagesList(admin.ModelAdmin):
-    model = Images
 
 
-class ImagesInline(admin.StackedInline):
-    model = Images
-    extra = 0
+class FileInline(admin.TabularInline):
+    model = File
+    extras = 3
 
 
-class CommentsInline(admin.TabularInline):
-    model = Comments
-    can_delete = False
-    readonly_fields = ('author', 'message', 'comment_time')
-    verbose_name_plural = 'Comments'
-
-    def has_add_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('message', 'author', 'object_id', 'content_type')
-    list_filter = ['content_type', 'author']
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('review', 'user', 'self_id', 'content_type')
+    list_filter = ['content_type', 'user']
 
 
 class ServiceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
-    inlines = [ImagesInline, ]
+    inlines = [FileInline, ]
     list_display = ('name', 'create_time',)
     readonly_fields = ('create_time',)
 
 
-admin.site.register(Services, ServiceAdmin)
-admin.site.register(Comments, CommentAdmin)
-admin.site.register(Images, ImagesList)
+admin.site.register(Service, ServiceAdmin)
+admin.site.register(Review, ReviewAdmin)
+admin.site.register(File)

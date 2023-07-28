@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comments
+from .models import Review
 
 
 class CommentsForm(forms.ModelForm):
@@ -7,17 +7,17 @@ class CommentsForm(forms.ModelForm):
     object_id = forms.IntegerField(widget=forms.HiddenInput, initial=123)
 
     class Meta:
-        model = Comments
-        fields = ('message',)
+        model = Review
+        fields = ('review',)
         error_messages = {
-            'message': {
-                'required': "Please Enter your Comment before you post."
+            'review': {
+                'required': "Please Enter your review before you post."
             },
         }
         widgets = {
-            'message': forms.TextInput(
+            'review': forms.TextInput(
                 attrs={'class': 'form', 'placeholder': 'Comment Your Review', 'required': True})
         }
         labels = {
-            'message': '',
+            'review': '',
         }

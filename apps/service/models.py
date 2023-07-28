@@ -7,14 +7,21 @@ from django.db.models.fields import DateTimeField
 from django.utils.text import slugify
 from django.contrib.contenttypes.models import ContentType
 
+STATUS = [
+        ('Open', 'Open'),
+        ('Closed', 'Closed'),
+    ]
 
-class Services(models.Model):
+
+class Service(models.Model):
     name = models.CharField(max_length=40)
-    image = models.ImageField(upload_to="service_images", max_length=256)
     slug = models.SlugField(max_length=100, unique=True, blank=True)
-    description = RichTextField(null=True)
+    image = models.ImageField(upload_to="service_images", max_length=256)
+    description = models.CharField(max_length=400)
+    Body = RichTextField(null=True)
     create_time = DateTimeField(blank=True, auto_now_add=True)
-    service_comment = GenericRelation('comments')
+    status = models.CharField(max_length=40, choices=STATUS)
+    service_comment = GenericRelation('Review')
 
     class Meta:
         verbose_name = "service"
@@ -24,31 +31,25 @@ class Services(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        super(Services, self).save(*args, **kwargs)
+        super(Service, self).save(*args, **kwargs)
 
 
-class Images(models.Model):
-    service = models.ForeignKey(Services, on_delete=models.CASCADE)
-    images = models.ImageField(upload_to="service_images", max_length=256)
-
-    class Meta:
-        verbose_name = "image"
+class File(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="service_images", max_length=256)
 
     def __str__(self):
-        return '%s - %s' % (str(self.service), str(self.images))
+        return '%s - %s' % (str(self.service), str(self.image))
 
 
-class Comments(models.Model):
-    author = models.ForeignKey(Costumer, on_delete=models.CASCADE)
-    message = models.CharField(max_length=256)
+class Review(models.Model):
+    user = models.ForeignKey(Costumer, on_delete=models.CASCADE)
+    review = models.CharField(max_length=256)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField(blank=True)
-    content_object = GenericForeignKey('content_type', 'object_id')
-    comment_time = DateTimeField(auto_now_add=True, blank=True)
-    comment = GenericRelation('comments')
-
-    class Meta:
-        verbose_name = "comment"
+    self_id = models.PositiveIntegerField(blank=True)
+    content_object = GenericForeignKey('content_type', 'self_id')
+    review_time = DateTimeField(auto_now_add=True, blank=True)
+    review_replay = GenericRelation('Review')
 
     def __str__(self):
         return self.message

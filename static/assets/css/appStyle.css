@@ -1,18 +1,4 @@
 
-*, *:before, *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  width: 100%;
-  height: 100%;
-}
-body.overflow {
-  overflow: hidden;
-}
-
 /*  resort
 ========================================== */
 .resort {
@@ -321,11 +307,11 @@ body.overflow {
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background-color: #444b7b;
+  background-color: #ffffff;
   opacity: 0;
   visibility: hidden;
 }
 .overlay.show {
-  opacity: 0.8;
+  opacity: 0.5;
   visibility: visible;
 }

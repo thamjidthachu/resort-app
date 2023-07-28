@@ -1,5 +1,6 @@
 # Create your views here.
 import datetime
+from typing import Any, Dict
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -14,24 +15,23 @@ from django.views.generic.edit import FormMixin
 from apps.authentication.models import Costumer
 from resortproject import settings
 from .forms import CommentsForm
-from .models import Services, Comments
-
-
-class EndlessScroll(ListView):
-    model = Services
-    template_name = 'services/endless_service.html'
-    context_object_name = 'resort_services'
-    paginate_by = 5
-    ordering = ['-create_time']
+from .models import Service, Review
 
 
 class PageList(ListView):
-    template_name = 'services/service_list.html'
+    template_name = 'services/list.html'
     context_object_name = 'resort_services'
     paginate_by = 5
 
     def get_queryset(self):
         return Services.objects.order_by('-create_time')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        n = self.get_queryset().count()
+        context['left_services'] = self.get_queryset()[n // 2:n]
+        context['right_services'] = self.get_queryset()[0:n // 2]
+        return context
 
     def listing(request):
         name = Services.objects.all()
@@ -44,17 +44,10 @@ class PageList(ListView):
 
 # Service_Individual
 class Details(FormMixin, DetailView):
-    template_name = 'services/service.html'
+    template_name = 'services/detail.html'
     form_class = CommentsForm
-    model = Services
+    model = Service
     context_object_name = 'service_data'
-
-    def get_queryset(self):
-        return Services.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(Details, self).get_context_data(**kwargs)
-        return context
 
     def get_success_url(self):
         return reverse('service:datas', kwargs={'slug': self.kwargs['slug']})
@@ -65,7 +58,6 @@ class Details(FormMixin, DetailView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            print(form.errors)
             return self.form_invalid(form)
 
     def form_valid(self, form):
