@@ -1,0 +1,259 @@
+.max_content_width-mob{
+    max-width: 1440px !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.heading-listing{
+    width: 265.5px;
+height: 56px;
+
+font-family: 'Playfair Display';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 140%;
+/* or 28px */
+
+text-transform: capitalize;
+
+color: #222222;
+}
+.para-feature{
+    width: 265.5px;
+   height: 63px;
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+color: #718096;
+}
+/* or 21px */
+.para-featuremob{
+width:232px;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+
+color: #718096;
+}
+.intro{
+    height: 39px;
+
+font-family: 'Playfair Display';
+font-style: normal;
+font-weight: 700;
+font-size: 28px;
+line-height: 140%;
+/* or 39px */
+
+display: flex;
+align-items: center;
+
+color: #09101D;
+}
+.description{
+    height: 96px;
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.15px;
+
+color: #718096;
+}
+.intro-sub{
+    height: 28px;
+
+font-family: 'Playfair Display';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 140%;
+/* identical to box height, or 28px */
+
+display: flex;
+align-items: center;
+
+color: #09101D;
+
+}
+.button-prop{
+    width: fit-content;
+    background: #FFBD59;
+    border-radius: 3px;
+    padding: 1px 5px 1px 5px;
+    min-width: 52px;
+}
+
+.card-intro{
+    /* height: 56px; */
+
+font-family: 'Playfair Display';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 140%;
+/* or 28px */
+
+text-transform: capitalize;
+
+color: #222222;
+}
+.card-desc{
+    /* height: 42px; */
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+/* or 21px */
+
+
+color: #718096;
+}
+
+.card-data{
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 140%;
+    /* identical to box height, or 28px */
+
+    text-transform: capitalize;
+
+    color: #FFFFFF;
+}
+
+.blog-details{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+/* or 150% */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.15px;
+
+color: #718096;
+}
+.micro-image{
+    width:360px;
+    height:276px;
+}
+.yellow-button{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color:#222222;
+    background-color:  #FFBD59;
+    border-radius: 3px;
+
+}
+.posted-by{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color: #718096;
+
+}
+.posted-blue{
+    color: #080CCB;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+.relate-img {
+  min-width: 86px;
+  width: 265.5px !important;
+  height: 229px !important;
+  max-width: unset !important;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.list-img {
+  min-width: 86px;
+  object-fit: cover;
+}
+.recent-post-by{
+    font-size: 14px;
+    font-weight: 400;
+    color: #718096;
+}
+.body-content{
+    min-width:50%;
+    max-width: 60%;
+    overflow-x: scroll;
+}
+#blog-body::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#blog-body::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#blog-body::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+
+
+
+#blog-body p{
+    font-family: 'Montserrat' !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    color: #718096 !important;
+}
+
+#blog-body h2{
+    font-family: 'Playfair Display' !important;
+    font-weight: 700 !important;
+    font-size: 28px !important;
+    color: #09101D !important;
+}
+#blog-body tr{
+    --tw-border-opacity: 1;
+    border-color: rgb(9 16 29 / var(--tw-border-opacity));
+    border-bottom-width: 2px;
+}
+#blog-body th{
+    width: 33.333333%;
+    --tw-bg-opacity: 1;
+    background-color: rgb(113 128 150 / var(--tw-bg-opacity));
+    text-align: left;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+#blog-body img{
+    object-fit: cover;
+    width:100% !important;
+    height: 420px !important;
+    border-radius: 12px !important;
+}
+

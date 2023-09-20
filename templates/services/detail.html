@@ -1,4 +1,171 @@
 {% extends "base.html" %}
-{% block content %}
+{% load static %}
 
+{% block title %}Services | {{ service.title}}{% endblock %}
+{% block tailwind %}
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            backgroundImage: (theme) => ({
+              "test-screen-md": "url('{{ service.image.url }}')",
+            }),
+            colors: {
+              blue: "#080CCB",
+              darkGrayishBlue: "hsl(227, 12%, 61%)",
+              veryLightGray: "hsl(0, 0%, 98%)",
+              gray: "#718096",
+              black: "#09101D",
+              darkBlue: "#520ACB",
+              whitish: "#D9DBE1",
+              yellow: "#FFBD59",
+            },
+
+            fontFamily: {
+              playfair: "'Playfair Display'",
+              montser: "'Montserrat'",
+            },
+          },
+        },
+      };
+    </script>
+{% endblock %}
+    <!--Navbar Ends-->
+{% block content %}
+    <div
+      id="home"
+      style="height: 531px"
+      class="test-screen bg-test-screen-md min-h-screen bg-no-repeat bg-cover relative flex justify-center w-full"
+    >
+      <!--Web View-->
+      <div class="max_content_width px-4 flex flex-col justify-start w-full absolute bottom-4">
+        <div class="flex flex-col space-y-6">
+          <button class="button-prop font-montser">
+            {{ service.category }}
+          </button>
+          <h1 class="font-playfair non-italic font-semibold text-[24px] md:text-[28px] text-white">
+            {{ service.name }}
+          </h1>
+          <p class="text-base font-semibold font-montser text-gray text-white">
+            {{ service.description|truncatechars:50 }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- -------second--------- -->
+    <div class="max_content_width flex flex-col md:flex-row md:space-x-24 mt-12">
+      <div id="blog-body" class="flex flex-col space-y-8 lg:space-y-6 body-content">
+      {{ service.Body|safe}}
+      </div>
+      <div class="flex flex-col space-y-6" style="min-width: 19rem;">
+        <h2 class="intro">Recent Blogs</h2>
+        <!-- ---first--- -->
+        {% for blog in related_blogs %}
+        <div class="flex flex-row space-x-4 cursor-pointer" onclick="window.location='{% url 'blog-details' blog.slug %}';">
+          <img onclick="window.location='{% url 'blog-details' blog.slug %}';" class="related-img rad-10 feat-img cursor-pointer" src="{{ blog.image.url }}" alt="img" />
+          <div class="flex-col space-y-2">
+            <button class="button-prop font-montser">
+              {{ blog.category }}
+            </button>
+            <h6 class="card-intro">{{ blog.title}}</h6>
+            <p class="card-desc">
+              {{ blog.description|truncatechars:50 }}
+            </p>
+            <h6 class="font-montser recent-post-by">Posted By :<span class="posted-blue"> {{ blog.posted_by}}</span></h6>
+            <h6 class="font-montser recent-post-by">{{ blog.posted_date|date:"d F Y" }}</h6>
+          </div>
+        </div>
+        {% endfor%}
+        <!-- ---second--- -->
+      </div>
+    </div>
+    <!-- --------Third section------ -->
+<hr class="max_content_width w-48 h-1 mt-4 bg-gray border-0 rounded mt-6 hr-style"/>
+<!-- -----Third Section----------- -->
+<h1 class="max_content_width-mob font-playfair non-italic text-2xl md:text-4xl font-bold items-center text-black mt-6">
+      Related Blogs
+</h1>
+
+<!-- ---fourth------ -->
+<div class="max_content_width-mob flex flex-col md:flex-row lg:space-x-32 mt-12">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="find-place-img_wrap">
+                <div class="grid">
+                    <figure class="effect-ruby">
+                        <img src="{% static 'assets/images/find-place1.jpg' %}" class="img-fluid" alt="img13" />
+                        <figcaption>
+                            <h5>Nightlife </h5>
+                            <p>385 Listings</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row find-img-align">
+                <div class="col-md-12">
+                    <div class="find-place-img_wrap">
+                        <div class="grid">
+                            <figure class="effect-ruby">
+                                <img src="{% static 'assets/images/find-place2.jpg' %}" class="img-fluid" alt="img13" />
+                                <figcaption>
+                                    <h5>Restaurants</h5>
+                                    <p>210 Listings</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="find-place-img_wrap">
+                        <div class="grid">
+                            <figure class="effect-ruby">
+                                <img src="{% static 'assets/images/find-place3.jpg' %}" class="img-fluid" alt="img13" />
+                                <figcaption>
+                                    <h5>Outdoors </h5>
+                                    <p>114 Listings</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row find-img-align">
+                <div class="col-md-12">
+                    <div class="find-place-img_wrap">
+                        <div class="grid">
+                            <figure class="effect-ruby">
+                                <img src="{% static 'assets/images/find-place4.jpg' %}" class="img-fluid" alt="img13" />
+                                <figcaption>
+                                    <h5>Hotels </h5>
+                                    <p>577 Listings</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="find-place-img_wrap">
+                        <div class="grid">
+                            <figure class="effect-ruby">
+                                <img src="{% static 'assets/images/find-place5.jpg' %}" class="img-fluid" alt="img13" />
+                                <figcaption>
+                                    <h5>Art & Culture </h5>
+                                    <p>79 Listings</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,130 @@
+@media screen and (max-width:600px){
+    div#blue-plane {
+        display:none;
+    }
+}
+@media screen and (max-width:500px){
+    .min-h-screen {
+        min-height: 85vh;
+    }
+}
+@media screen and (max-width:478px){
+    .min-h-screen {
+        min-height: 80vh !important;
+    }
+}
+
+@media screen and (max-width:425px){
+    .min-h-screen {
+        min-height: 70vh !important;
+    }
+}
+
+@media screen and (max-width:390px){
+    .min-h-screen {
+        min-height: 65vh !important;
+    }
+}
+
+@media screen and (max-width:320px){
+    .min-h-screen {
+        min-height: 55vh !important;
+    }
+}
+
+
+@media screen and (max-width:767px){
+    .acc-container1,.acc-container2 {
+        width: 100%;
+    }
+    .pad-t-1{
+        padding-top:0rem !important;
+    }
+    .body-content{
+        max-width: 90%;
+    }
+    .feat-fix-img {
+    height: 350px !important;
+    object-fit: cover;
+    }
+}
+
+@media screen and (max-width:1015px){
+    .hidden-mob{
+    display:flex;
+    }
+    .visible-mob{
+    display:none;
+    }
+}
+
+@media screen and (max-width:1023px){
+    .pad-t-1{
+        padding-top:2rem;
+    }
+    .width-works{
+        width : 100% !important;
+    }
+    .tab-invisible{
+        visibility: hidden;
+    }
+    .pt-7-rem{
+    padding-top : 10rem;
+    }
+    .feat-fix-img {
+    height: 550px !important;
+    object-fit: cover;
+    }
+    .list-mt-10{
+        margin-top: 1.5rem !important;
+    }
+    #blog-body img{
+    height: 260px !important;
+    }
+}
+@media screen and (max-width:767px){
+    .feat-fix-img {
+    height: 350px !important;
+    object-fit: cover;
+    }
+    .cmt-10{
+        margin-top: 1rem !important;
+    }
+}
+}
+
+@media screen and (max-width:1440px){
+    .mar-lr-1-imp{
+        margin-left: 2rem !important;
+        margin-right: 2rem !important;
+    }
+}
+@media(max-width:576px){
+    .max_content_width-mob{
+      padding-left: 20px !important;
+      padding-right: 20px!important;
+    }
+  }
+
+
+/*---------------------------------------Min-Width---------------------------------------*/
+
+@media screen and (min-width:1015px){
+    .height-30{
+        max-height : 30rem;
+    }
+}
+
+@media screen and (min-width:1441px){
+    .mar-lr-1-imp{
+    max-width: 1370px !important;
+    }
+}
+@media screen and (min-width:1024px){
+    .feat-width-imp{
+    width:50% !important;
+    }
+    .mt-0{
+    margin-top: 0px !important;;
+    }
+}

@@ -24,7 +24,7 @@ class PageList(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        return Services.objects.order_by('-create_time')
+        return Service.objects.order_by('-create_time')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -34,7 +34,7 @@ class PageList(ListView):
         return context
 
     def listing(request):
-        name = Services.objects.all()
+        name = Service.objects.all()
         paginator = Paginator(name, 5)  # Show 5 contacts per page.
 
         page_number = request.GET.get('page')
@@ -47,10 +47,10 @@ class Details(FormMixin, DetailView):
     template_name = 'services/detail.html'
     form_class = CommentsForm
     model = Service
-    context_object_name = 'service_data'
+    context_object_name = 'service'
 
     def get_success_url(self):
-        return reverse('service:datas', kwargs={'slug': self.kwargs['slug']})
+        return reverse('service:details', kwargs={'slug': self.kwargs['slug']})
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()

@@ -134,7 +134,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-5">
                     <div class="styled-heading">
-                        <h3>Featured Places</h3>
+                        <h3>Featured Services</h3>
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@
                 {% for service in sevices %}
                 <div class="col-md-4 featured-responsive">
                     <div class="featured-place-wrap">
-                        <a href="detail.html">
+                        <a href="{% url 'service:details' service.slug %}">
                             <img src="{{ service.image.url}}" class="img-fluid service-list-img" alt="#">
                             <span class="featured-rating-orange">new</span>
                             <div class="featured-title-box">
