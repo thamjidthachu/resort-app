@@ -4,7 +4,7 @@ from .models import Review
 
 class CommentsForm(forms.ModelForm):
     content_type = forms.CharField(widget=forms.HiddenInput, initial='content_type')
-    object_id = forms.IntegerField(widget=forms.HiddenInput, initial=123)
+    self_id = forms.IntegerField(widget=forms.HiddenInput, initial=123)
 
     class Meta:
         model = Review

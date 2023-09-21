@@ -2,7 +2,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.db import models
 from ckeditor.fields import RichTextField
-from apps.authentication.models import Costumer
+from apps.authentication.models import User
 from django.db.models.fields import DateTimeField
 from django.utils.text import slugify
 from django.contrib.contenttypes.models import ContentType
@@ -43,14 +43,14 @@ class File(models.Model):
 
 
 class Review(models.Model):
-    user = models.ForeignKey(Costumer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     review = models.CharField(max_length=256)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    self_id = models.PositiveIntegerField(blank=True)
-    content_object = GenericForeignKey('content_type', 'self_id')
+    object_id = models.PositiveIntegerField(blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
     review_time = DateTimeField(auto_now_add=True, blank=True)
     review_replay = GenericRelation('Review')
 
     def __str__(self):
-        return self.message
+        return self.review
 

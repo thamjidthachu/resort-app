@@ -165,4 +165,5 @@ JAZZMIN_SETTINGS = {
     "copyright": "Thamjid Thachu Ltd",
 }
 
+AUTH_USER_MODEL = 'authentication.User'
 

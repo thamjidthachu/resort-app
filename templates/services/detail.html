@@ -58,114 +58,121 @@
       {{ service.Body|safe}}
       </div>
       <div class="flex flex-col space-y-6" style="min-width: 19rem;">
-        <h2 class="intro">Recent Blogs</h2>
-        <!-- ---first--- -->
-        {% for blog in related_blogs %}
-        <div class="flex flex-row space-x-4 cursor-pointer" onclick="window.location='{% url 'blog-details' blog.slug %}';">
-          <img onclick="window.location='{% url 'blog-details' blog.slug %}';" class="related-img rad-10 feat-img cursor-pointer" src="{{ blog.image.url }}" alt="img" />
-          <div class="flex-col space-y-2">
-            <button class="button-prop font-montser">
-              {{ blog.category }}
-            </button>
-            <h6 class="card-intro">{{ blog.title}}</h6>
-            <p class="card-desc">
-              {{ blog.description|truncatechars:50 }}
-            </p>
-            <h6 class="font-montser recent-post-by">Posted By :<span class="posted-blue"> {{ blog.posted_by}}</span></h6>
-            <h6 class="font-montser recent-post-by">{{ blog.posted_date|date:"d F Y" }}</h6>
-          </div>
+        <h2 class="intro">Related Services</h2>
+        {% for service in related_services %}
+        <div class="featured-place-wrap">
+            <a href="{% url 'service:details' service.slug %}">
+                <img src="{{ service.image.url}}" class="img-fluid service-list-img" alt="#">
+                <span class="featured-rating-orange">new</span>
+                <div class="featured-title-box">
+                    <h6>{{service.name}}</h6>
+                    <p>Restaurant </p> <span>• </span>
+                    <p>3 Reviews</p> <span> • </span>
+                    <p><span>$$$</span>$$</p>
+                    <p>{{service.description | truncatechars:200}}</p>
+                    <div class="bottom-icons">
+                        <div class="closed-now">{{service.status}} NOW</div>
+                        <span class="ti-heart"></span>
+                        <span class="ti-bookmark"></span>
+                    </div>
+                </div>
+            </a>
         </div>
         {% endfor%}
-        <!-- ---second--- -->
+<!-- ---second--- -->
       </div>
     </div>
-    <!-- --------Third section------ -->
 <hr class="max_content_width w-48 h-1 mt-4 bg-gray border-0 rounded mt-6 hr-style"/>
 <!-- -----Third Section----------- -->
 <h1 class="max_content_width-mob font-playfair non-italic text-2xl md:text-4xl font-bold items-center text-black mt-6">
-      Related Blogs
+      Images
 </h1>
-
-<!-- ---fourth------ -->
 <div class="max_content_width-mob flex flex-col md:flex-row lg:space-x-32 mt-12">
     <div class="row">
+        {% for file in service.file_set.all %}
         <div class="col-md-4">
             <div class="find-place-img_wrap">
                 <div class="grid">
                     <figure class="effect-ruby">
-                        <img src="{% static 'assets/images/find-place1.jpg' %}" class="img-fluid" alt="img13" />
+                        <img src="{{file.image.url}}" class="img-fluid" alt="img13" />
                         <figcaption>
-                            <h5>Nightlife </h5>
+                            <h5>{{service.name}}</h5>
                             <p>385 Listings</p>
                         </figcaption>
                     </figure>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="row find-img-align">
-                <div class="col-md-12">
-                    <div class="find-place-img_wrap">
-                        <div class="grid">
-                            <figure class="effect-ruby">
-                                <img src="{% static 'assets/images/find-place2.jpg' %}" class="img-fluid" alt="img13" />
-                                <figcaption>
-                                    <h5>Restaurants</h5>
-                                    <p>210 Listings</p>
-                                </figcaption>
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="find-place-img_wrap">
-                        <div class="grid">
-                            <figure class="effect-ruby">
-                                <img src="{% static 'assets/images/find-place3.jpg' %}" class="img-fluid" alt="img13" />
-                                <figcaption>
-                                    <h5>Outdoors </h5>
-                                    <p>114 Listings</p>
-                                </figcaption>
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row find-img-align">
-                <div class="col-md-12">
-                    <div class="find-place-img_wrap">
-                        <div class="grid">
-                            <figure class="effect-ruby">
-                                <img src="{% static 'assets/images/find-place4.jpg' %}" class="img-fluid" alt="img13" />
-                                <figcaption>
-                                    <h5>Hotels </h5>
-                                    <p>577 Listings</p>
-                                </figcaption>
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="find-place-img_wrap">
-                        <div class="grid">
-                            <figure class="effect-ruby">
-                                <img src="{% static 'assets/images/find-place5.jpg' %}" class="img-fluid" alt="img13" />
-                                <figcaption>
-                                    <h5>Art & Culture </h5>
-                                    <p>79 Listings</p>
-                                </figcaption>
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
+<h1 class="max_content_width-mob font-playfair non-italic text-2xl md:text-4xl font-bold items-center text-black mt-6">
+    Reviews
+</h1>
+
+    {% for comment in service.service_comment.all %}
+        <div class="row my-3">
+            <div class="col-md-1">
+                <img class="rounded mx-auto d-block w-100 p-2 border border-dark" src="/static/assets/images/user.png" alt="user">
+            </div>
+            <div class="col-md-11">
+                <b> {{comment.user}} </b> <span class="badge bg-secondary">{{comment.review_time}}</span>
+                <div> {{comment.review}}</div>
+
+                <div class="reply mx-0">
+                    <p class="link" data-toggle="collapse" data-target="#replyBox{{comment.id}}" aria-expanded="false" aria-controls="replyBox {{comment.id}}">
+                        Reply
+                    </p>
+                    <div class="collapse reply-sec" id="replyBox{{comment.id}}">
+                        {% for reply in comment.review_replay.all %}
+                        <hr>
+                        <div class="row my-3">
+                            <div class="col-md-1">
+                                <img class="rounded mx-auto d-block w-100 p-2 border border-danger" src="/static/assets/images/user.png" alt="user">
+                            </div>
+                            <div class="col-md-11">
+                                <b> {{reply.user}} </b> <span class="badge badge-dark bg-white">{{reply.review_time}}</span>
+                                <div> {{reply.review}}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    <div class="my-2">
+                        {% if user.is_authenticated %}
+                            Reply as {{ user.username }}: <br>
+                        <form action="{% url 'service:replies' %}" method="POST" novalidate>
+                            {% csrf_token %}
+                            <input type="text" name="reply" class="form" placeholder="Reply to {{ comment.author }}">
+                            <input type="hidden" name="reply_id" value="{{ comment.id }}">
+                            <input type="hidden" name="service" value="{{ comment.self_id }}">
+                            <input type="hidden" name="authuser" value="{{ user.id}}">
+                            <input class="btn btn-primary ms-2" type="submit" value="reply">
+                        </form>
+                        {% else %}
+                            <p>Please Log in to Reply.....</p>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+<div class="container">
+{% if user.is_authenticated %}
+    <span>Comment as {{ user.username }}:</span>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {% if from.errors %}
+            {{ form.errors}}
+        {% endif %}
+        {{ form.as_p }}
+        <input class="btn btn-outline-primary ms-2" type="submit" value="post">
+    </form>
+{% else %}
+    <p>Please Log in to Comment.....</p>
+{% endif %}
+</div>
+
 {% endblock %}

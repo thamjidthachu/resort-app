@@ -12,7 +12,7 @@ class FileInline(admin.TabularInline):
 
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('review', 'user', 'self_id', 'content_type')
+    list_display = ('review', 'user', 'object_id', 'content_type')
     list_filter = ['content_type', 'user']
 
 
