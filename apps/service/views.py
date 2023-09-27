@@ -24,7 +24,7 @@ class PageList(ListView):
 
     def get_queryset(self):
         return Service.objects.order_by('-create_time')
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         n = self.get_queryset().count()
@@ -53,7 +53,6 @@ class Details(FormMixin, DetailView):
         context['related_services'] = Service.objects.all().exclude(slug=self.kwargs['slug']).order_by('-create_time')
         return context
 
-
     def get_success_url(self):
         return reverse('service:details', kwargs={'slug': self.kwargs['slug']})
 
@@ -68,8 +67,8 @@ class Details(FormMixin, DetailView):
     def form_valid(self, form):
         myform = form.save(commit=False)
         myform.post = self.get_object()
-        myform.author = get_object_or_404(User, user_id=self.request.user.id)
-        myform.content_type = ContentType.objects.get(app_label='Services', model='services')
+        myform.author = get_object_or_404(User, id=self.request.user.id)
+        myform.content_type = ContentType.objects.get(app_label='Service', model='services')
         myform.content_object = get_object_or_404(Service, pk=self.object.id)
         myform.save()
         return super(Details, self).form_valid(form)
