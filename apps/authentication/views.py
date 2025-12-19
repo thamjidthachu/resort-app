@@ -19,8 +19,12 @@ from .serializers import (
     ForgotPasswordSerializer, 
     PasswordResetSerializer,
     ProfileUpdateSerializer,
-    AvatarUpdateSerializer
+    AvatarUpdateSerializer,
+    GoogleAuthSerializer,
+    GoogleSignupSerializer,
+    GoogleLoginSerializer
 )
+from .google_auth import GoogleAuthService
 from utils.email import send_email_message
 
 User = get_user_model()
@@ -306,3 +310,142 @@ class AvatarUpdateView(APIView):
         return Response({
             'message': 'No avatar to delete.'
         }, status=status.HTTP_404_NOT_FOUND)
+
+
+class GoogleSignupView(APIView):
+    """API endpoint for Google signup"""
+    permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        """Sign up user with Google OAuth2 token"""
+        serializer = GoogleSignupSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        token = serializer.validated_data['token']
+        phone = serializer.validated_data.get('phone', '')
+        username = serializer.validated_data.get('username')
+        
+        try:
+            # Verify Google token and get user info
+            user_info = GoogleAuthService.verify_google_token(token)
+        except Exception as e:
+            auth_logger.error(f"Google token verification failed: {str(e)}")
+            return Response(
+                {'detail': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        email = user_info['email']
+        full_name = user_info['full_name']
+        
+        # Check if user already exists
+        if User.objects.filter(email=email).exists():
+            return Response(
+                {'detail': 'User with this email already exists. Please use login.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Generate username if not provided
+        if not username:
+            base_username = email.split('@')[0]
+            username = base_username
+            counter = 1
+            while User.objects.filter(username=username).exists():
+                username = f"{base_username}{counter}"
+                counter += 1
+        
+        try:
+            # Create new user
+            user = User.objects.create_user(
+                email=email,
+                username=username,
+                full_name=full_name,
+                phone=phone,
+                password=get_random_string(32)  # Generate random password since using Google
+            )
+            
+            # Log signup
+            auth_logger.info(f"New user registered via Google: {email}")
+            
+            # Generate JWT tokens
+            refresh = RefreshToken.for_user(user)
+            
+            # Serialize user data
+            user_serializer = UserSerializer(user, context={'request': request})
+            
+            return Response({
+                'user': user_serializer.data,
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'message': 'Google signup successful.'
+            }, status=status.HTTP_201_CREATED)
+            
+        except Exception as e:
+            auth_logger.error(f"Error creating user from Google signup: {str(e)}")
+            return Response(
+                {'detail': 'Error creating user account.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class GoogleSigninView(APIView):
+    """API endpoint for Google signin"""
+    permission_classes = [AllowAny]
+    
+    def post(self, request, *args, **kwargs):
+        """Sign in user with Google OAuth2 token"""
+        serializer = GoogleLoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        token = serializer.validated_data['token']
+        
+        try:
+            # Verify Google token and get user info
+            user_info = GoogleAuthService.verify_google_token(token)
+        except Exception as e:
+            auth_logger.error(f"Google token verification failed: {str(e)}")
+            return Response(
+                {'detail': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        email = user_info['email']
+        
+        # Check if user exists
+        user = User.objects.filter(email=email).first()
+        
+        if not user:
+            return Response(
+                {'detail': 'User with this email does not exist. Please sign up first.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        # Check if user is active
+        if not user.is_active:
+            return Response(
+                {'detail': 'User account is inactive.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        try:
+            # Generate JWT tokens
+            refresh = RefreshToken.for_user(user)
+            
+            # Serialize user data
+            user_serializer = UserSerializer(user, context={'request': request})
+            
+            auth_logger.info(f"User logged in via Google: {email}")
+            
+            return Response({
+                'user': user_serializer.data,
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'message': 'Google signin successful.'
+            }, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            auth_logger.error(f"Error during Google signin: {str(e)}")
+            return Response(
+                {'detail': 'Error signing in.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

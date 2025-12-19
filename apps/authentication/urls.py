@@ -11,7 +11,9 @@ from .views import (
     ForgotPasswordView, 
     PasswordResetView,
     ProfileUpdateView,
-    AvatarUpdateView
+    AvatarUpdateView,
+    GoogleSignupView,
+    GoogleSigninView
 )
 
 app_name = 'Authentication'
@@ -23,6 +25,10 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    # Google OAuth2 endpoints
+    path('google/signup/', GoogleSignupView.as_view(), name='google-signup'),
+    path('google/signin/', GoogleSigninView.as_view(), name='google-signin'),
 
     # Profile endpoints
     path('profile/', ProfileView.as_view(), name='profile'),

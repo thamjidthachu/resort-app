@@ -180,3 +180,31 @@ class AvatarUpdateSerializer(serializers.ModelSerializer):
                     "Invalid file type. Only JPEG, PNG, GIF, and WebP images are allowed."
                 )
         return value
+
+
+class GoogleAuthSerializer(serializers.Serializer):
+    """Serializer for Google OAuth2 authentication"""
+    token = serializers.CharField(required=True, write_only=True)
+    
+    def validate_token(self, value):
+        """Validate Google token"""
+        if not value:
+            raise serializers.ValidationError("Token is required")
+        return value
+
+
+class GoogleSignupSerializer(GoogleAuthSerializer):
+    """Serializer for Google signup with additional fields"""
+    phone = serializers.CharField(required=False, allow_blank=True, max_length=50)
+    username = serializers.CharField(required=False, allow_blank=True, max_length=50)
+    
+    def validate_username(self, value):
+        """Validate username is unique if provided"""
+        if value and User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("This username is already in use.")
+        return value
+
+
+class GoogleLoginSerializer(GoogleAuthSerializer):
+    """Serializer for Google login"""
+    pass

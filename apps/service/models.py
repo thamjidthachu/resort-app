@@ -5,6 +5,8 @@ from ckeditor.fields import RichTextField
 from django.db.models.fields import DateTimeField
 from django.utils.text import slugify
 from django.contrib.contenttypes.models import ContentType
+import re
+import os
 
 from apps.authentication.models import User
 from utils import ActiveModel, TimeStampedModel
